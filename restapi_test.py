@@ -4,7 +4,6 @@ import requests
 import json
 from getpass import getpass
 
-
 # insert your api key here for the location
 print('Enter your the City of where you want know the current weather.')
 city_name = input()
@@ -31,15 +30,17 @@ response = requests.request("GET", wurl, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 
-message_dict = response.json()
-message = json.dumps(message_dict, indent= 4)
-print(message)
-print(message_dict['name'])
-print(message_dict['main']['temp'])
-for weather_dict in message_dict['weather']:
-    for key, val in weather_dict.items():
-        if key == 'main':
-            print(val)
+message = response.json()
+# message = json.dumps(message_dict, indent= 4)
+# print(message)
+print(message['name'])
+print(message['main']['temp'])
+for weather in message['weather']:
+    for key, value in weather.items():
+        print(key['main'])
+        # if key == 'main':
+            # print(value)
+# 
 # print(message_dict['weather'])
 
 
